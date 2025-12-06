@@ -1,0 +1,149 @@
+:root{
+  --bg:#0b0b0b;
+  --panel:#0f0f0f;
+  --muted:#cfcfcf;
+  --accent:#FFD300;
+  --accent-dark:#E6C200;
+  --header-height:72px;
+}
+
+.root{
+  height:100vh;
+  overflow:hidden;
+  background-image:
+    linear-gradient(180deg,rgba(11,11,11,0.85) 0%,rgba(7,7,7,0.9) 50%,rgba(255,211,0,0.05) 100%),
+    url('./background.jpeg');
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  color:var(--muted);
+  font-family:var(--font-orbitron), var(--font-space-mono), monospace;
+  font-weight:700;
+}
+.main{
+  display:flex;
+  gap:12px;
+  padding:12px;
+  height: calc(100vh - var(--header-height));
+  box-sizing: border-box;
+}
+.sidebar{
+  width:300px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  padding-right:6px;
+}
+.content{
+  flex:1;
+  padding:12px;
+  display:grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap:12px;
+  box-sizing:border-box;
+  overflow:auto;
+}
+.pageTitle{
+  color:var(--accent);
+  margin:0 0 8px 0;
+  font-size:28px;
+}
+.lead{
+  color:#ddd;
+  margin:0 0 20px 0;
+  font-size:14px;
+}
+.docsSection{
+  margin-top:0;
+  background:rgba(15,15,15,0.7);
+  padding:12px;
+  border-radius:8px;
+  border:1px solid rgba(255,211,0,0.1);
+  backdrop-filter:blur(10px);
+}
+.sectionTitle{
+  color:var(--accent);
+  margin:0 0 12px 0;
+  font-size:16px;
+}
+.ghostBtn{
+  margin-left:8px;
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.06);
+  color:var(--muted);
+  padding:8px 14px;
+  border-radius:6px;
+  font-size:13px;
+}
+
+/* Glass-morphism panels */
+.panel{
+  background:rgba(15,15,15,0.65) !important;
+  backdrop-filter:blur(12px) !important;
+  border:1px solid rgba(255,211,0,0.08) !important;
+  padding:16px !important;
+}
+
+/* Metallic steel text style */
+.metalText{
+  background: linear-gradient(90deg, #bfc8cf 0%, #f6f8fa 30%, #9aa3ab 60%, #c7cfd6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.6), 0 6px 18px rgba(0,0,0,0.25);
+  letter-spacing: 0.6px;
+}
+.metalSubtitle{
+  background: linear-gradient(90deg, #d6dadd 0%, #eef0f2 40%, #bfc7cb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0.9;
+  font-size: 12px;
+}
+
+/* Plain metallic color for inputs/buttons where background-clip is unsupported */
+.metalPlain{
+  color: #e6eaee;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+}
+
+/* Shimmering metallic shine for prominent titles */
+.metalShine{
+  background: linear-gradient(90deg, #bfc8cf 0%, #ffffff 28%, #c7cfd6 52%, #ffffff 72%, #bfc8cf 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 2.8s linear infinite;
+  will-change: background-position;
+}
+
+@keyframes shine {
+  0% { background-position: -100% 0; }
+  50% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* Subtle pulsing glow to complement the metallic shine */
+.metalGlow{
+  /* small warm glow */
+  text-shadow: 0 0 6px rgba(255,211,0,0.06), 0 6px 18px rgba(255,211,0,0.03);
+  animation: glowPulse 3.6s ease-in-out infinite;
+  will-change: text-shadow, filter;
+}
+
+@keyframes glowPulse{
+  0% {
+    text-shadow: 0 0 3px rgba(255,211,0,0.03), 0 4px 10px rgba(255,211,0,0.02);
+    filter: drop-shadow(0 0 0px rgba(255,211,0,0));
+  }
+  45% {
+    text-shadow: 0 0 10px rgba(255,211,0,0.12), 0 8px 22px rgba(255,211,0,0.06);
+    filter: drop-shadow(0 0 4px rgba(255,211,0,0.06));
+  }
+  100% {
+    text-shadow: 0 0 3px rgba(255,211,0,0.03), 0 4px 10px rgba(255,211,0,0.02);
+    filter: drop-shadow(0 0 0px rgba(255,211,0,0));
+  }
+}
