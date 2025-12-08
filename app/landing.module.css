@@ -1,0 +1,250 @@
+:root{
+  --accent:#FFD300;
+  --bg-dark:#070707;
+}
+
+.root{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  background: linear-gradient(180deg, rgba(4,4,4,0.6), rgba(8,8,8,0.6));
+  color:#e6eaee;
+  font-family: var(--font-orbitron, system-ui, sans-serif);
+}
+
+.hero{
+  width:min(1000px,92%);
+  text-align:center;
+  padding:36px 28px;
+  border-radius:12px;
+  background: rgba(15,15,15,0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,211,0,0.06);
+  position:relative;
+  z-index:2;
+}
+
+.title{
+  margin:0 0 8px 0;
+  font-size:40px;
+  font-weight:800;
+  background: linear-gradient(90deg, 
+    #3a3f47 0%,
+    #5a6370 8%,
+    #8a9aaa 16%,
+    #b8c8d8 24%,
+    #d8e4f0 32%,
+    #e8f0f8 40%,
+    #f4f8fc 50%,
+    #e8f0f8 60%,
+    #d8e4f0 68%,
+    #b8c8d8 76%,
+    #8a9aaa 84%,
+    #5a6370 92%,
+    #3a3f47 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6)) 
+          drop-shadow(0 1px 2px rgba(255,255,255,0.4))
+          brightness(1.1)
+          contrast(1.3);
+  animation: metallicShine 3.5s ease-in-out infinite;
+  will-change: background-position, filter;
+  letter-spacing:0.8px;
+}
+
+@keyframes metallicShine {
+  0%, 100% { 
+    background-position: 0% 0;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6)) 
+            drop-shadow(0 1px 2px rgba(255,255,255,0.3))
+            brightness(1.05)
+            contrast(1.2);
+  }
+  50% { 
+    background-position: 100% 0;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.7)) 
+            drop-shadow(0 2px 4px rgba(255,255,255,0.5))
+            brightness(1.15)
+            contrast(1.4);
+  }
+}
+
+@keyframes metallicShine {
+  0%, 100% { 
+    background-position: 0% 0;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6)) 
+            drop-shadow(0 1px 2px rgba(255,255,255,0.3))
+            brightness(1.05)
+            contrast(1.2);
+  }
+  50% { 
+    background-position: 100% 0;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.7)) 
+            drop-shadow(0 2px 4px rgba(255,255,255,0.5))
+            brightness(1.15)
+            contrast(1.4);
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    text-shadow: 0 0 3px rgba(255,211,0,0.03), 0 4px 10px rgba(255,211,0,0.02);
+    filter: drop-shadow(0 0 0px rgba(255,211,0,0));
+  }
+  45% {
+    text-shadow: 0 0 10px rgba(255,211,0,0.12), 0 8px 22px rgba(255,211,0,0.06);
+    filter: drop-shadow(0 0 4px rgba(255,211,0,0.06));
+  }
+  100% {
+    text-shadow: 0 0 3px rgba(255,211,0,0.03), 0 4px 10px rgba(255,211,0,0.02);
+    filter: drop-shadow(0 0 0px rgba(255,211,0,0));
+  }
+}
+
+.lead{
+  margin:0 0 18px 0;
+  color:#cfcfcf;
+}
+
+.actions{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  align-items:center;
+}
+
+.cta{
+  background: var(--accent);
+  color:#111;
+  padding:12px 20px;
+  border-radius:10px;
+  font-weight:700;
+  text-decoration:none;
+}
+
+/* Background video styles */
+.bgVideo{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  /* place video above hero initially (foreground) */
+  z-index:4;
+  filter: saturate(0.95) contrast(0.95) brightness(0.95);
+  transform: scale(1.02);
+}
+
+/* gradient overlay on top of video to ensure readability */
+.videoOverlay{
+  position:absolute;
+  inset:0;
+  /* overlay sits above video to dim it when video is foreground */
+  z-index:5;
+  background: linear-gradient(180deg, rgba(2,2,2,0.45) 0%, rgba(0,0,0,0.25) 35%, rgba(0,0,0,0.6) 100%), radial-gradient(circle at 10% 20%, rgba(255,211,0,0.06), transparent 12%);
+  pointer-events:none;
+  transition: opacity 520ms ease;
+}
+/* persistent top-right sign-in button - REMOVED */
+
+/* state when user scrolls: video moves to background and hero/sign become prominent */
+.scrolled .bgVideo{
+  /* send video to background visually */
+  z-index:0;
+  transform: scale(1.05) translateY(-6%);
+  filter: saturate(0.85) contrast(0.9) brightness(0.7) blur(2px);
+  opacity:0.7;
+  transition: transform 600ms ease, filter 600ms ease, opacity 600ms ease;
+}
+
+.scrolled .videoOverlay{
+  /* fade overlay away so content becomes visible */
+  opacity:0;
+}
+
+.scrolled .hero{
+  transform: translateY(-18px);
+  /* bring hero in front of overlay once scrolled */
+  z-index:6;
+  transition: transform 420ms cubic-bezier(.2,.9,.3,1);
+}
+
+/* content reveal animations: title, lead, actions */
+.title, .lead, .actions{
+  opacity:0;
+  transform: translateY(12px);
+  transition: opacity 420ms ease, transform 420ms ease;
+}
+
+/* reveal-on-scroll modular classes */
+.reveal{
+  opacity:0;
+  transform: translateY(12px);
+}
+.revealed{
+  opacity:1;
+  transform: translateY(0);
+}
+
+.scrolled .title{
+  /* backward-compat: keep scrolled-triggered reveal if used */
+  opacity:1;
+  transform: translateY(0);
+  transition-delay: 120ms;
+}
+.scrolled .lead{
+  opacity:1;
+  transform: translateY(0);
+  transition-delay: 240ms;
+}
+.scrolled .actions{
+  opacity:1;
+  transform: translateY(0);
+  transition-delay: 360ms;
+}
+
+/* CTA hidden initially (under video), fades in after scroll */
+.cta{
+  background: var(--accent);
+  color:#111;
+  padding:12px 20px;
+  border-radius:10px;
+  font-weight:700;
+  text-decoration:none;
+  opacity:0;
+  transform: translateY(8px);
+  transition: opacity 360ms ease, transform 360ms ease;
+  pointer-events:none;
+}
+
+.ctaVisible{
+  opacity:1;
+  transform: translateY(0);
+  pointer-events:auto;
+}
+
+/* when a container is revealed, ensure contained CTA becomes visible */
+.revealed .cta{
+  opacity:1;
+  transform: translateY(0);
+  pointer-events:auto;
+  transition-delay: 360ms;
+}
+
+/* ensure transitions for non-scrolled to scrolled and back */
+.bgVideo{transition: transform 600ms ease, filter 600ms ease, opacity 600ms ease;}
+.hero{transition: transform 420ms cubic-bezier(.2,.9,.3,1);}
+
+.ghost{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.08);
+  color:#e6eaee;
+  padding:10px 16px;
+  border-radius:10px;
+}
